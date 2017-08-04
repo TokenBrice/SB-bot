@@ -5,8 +5,8 @@ Simple Python scripts made for learning purposes. Using Selenium and Statusbrew.
  **It's a learning project, the code if far from perfect. Feel free to improve it!**
 
 ## Disclaimer
-The defollow script is fully autonomous and can be ran with TaskScheduler/CRON jobs.
-The follow script still requires manual intervention, as I wanted to keep control over the targeted accounts for follower scraping.
+* The defollow (unfollow.py) script is fully autonomous and can be ran with TaskScheduler/CRON jobs.
+* The follow (follow.py) script still requires manual intervention, as I wanted to keep control over the targeted accounts for follower scraping.
 
 ## Requirements
 * You'll need an account on [StatusBrew](https://www.statusBrew.com) to use the script.
