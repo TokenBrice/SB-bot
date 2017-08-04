@@ -9,5 +9,5 @@ The follow script still requires manual intervention, as I wanted to keep contro
 
 ## Requirements
 * You'll need an account on [StatusBrew](https://www.statusBrew.com) to use the script.
-* Selenium Python library is also required
+* Selenium Python library is also required.
 * [CALLR Python SDK](https://www.callr.com/docs/) is optional, if you want automated SMS reporting.
