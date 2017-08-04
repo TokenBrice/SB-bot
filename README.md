@@ -2,7 +2,7 @@
 
 ## Purpose
 Simple Python scripts made for learning purposes. Using Selenium and Statusbrew.com, they allow for semi-automated and targeted Twitter follow/defolow activities.
-** It's a learning project, the code if far from perfect. Feel free to improve it!**
+ **It's a learning project, the code if far from perfect. Feel free to improve it!**
 
 ## Disclaimer
 The defollow script is fully autonomous and can be ran with TaskScheduler/CRON jobs.
