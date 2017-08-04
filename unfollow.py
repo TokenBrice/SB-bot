@@ -71,7 +71,7 @@ def unfollowloop():
 # CLOSE + LOG FUNCTION
 def ending():
         print("Ending+logging function runned %d unfollowed" % ufcount)
-        # OPTIONAL SMS REPORTING api.call('sms.send', 'SMS', '+336XXXXXXXX', 'CALLR unfollow bot done, %d unfollowed' % ufcount, None)
+        # OPTIONAL SMS REPORTING api.call('sms.send', 'SMS', '+336XXXXXXXX', 'Unfollow bot done, %d unfollowed' % ufcount, None)
         driver.quit()
         sys.exit()
 
