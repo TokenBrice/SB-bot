@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
 # Script is ready to use once you set up
-# Basic function: Chromdrivepath (line 20), SB login (30), SB password (32)
+# Basic function: Chromdriverpath (line 20), SB login (30), SB password (32)
 # Optional SMS Reporting: CALLR logins (17), Destination number (74)
 
 # Optional, CALLR API is used for SMS reporting
