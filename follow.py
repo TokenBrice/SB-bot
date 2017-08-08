@@ -14,6 +14,10 @@ from selenium.webdriver.common.by import By
 # import callr
 # api = callr.Api("CALLRLogin","CALLRpwd")
 
+# Script is ready to use once you set up
+# Basic function: Chromdrivepath (line 23), SB login (34), SB password (36)
+# Optional SMS Reporting: CALLR logins (15), Destination number (82)
+
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
 driver = webdriver.Chrome(executable_path="CHROMDRIVER.EXE PATH", chrome_options=options)
