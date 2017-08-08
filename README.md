@@ -14,4 +14,4 @@ Simple Python scripts made for learning purposes. Using Selenium and Statusbrew.
 * [CALLR Python SDK](https://www.callr.com/docs/) is optional, if you want automated SMS reporting.
 
 ## Why Selenium?
-I have no idea of StatusBrew's devs tolerance for bots. Using Selenium, even though it makes the bot slower also makes it more **human-like** on the other end. I've been using this bot (in even more primitive forms than the current one) for years without hitting restrictions or raising alarms.
+I have no idea of StatusBrew's devs tolerance for bots. Using Selenium, even though it makes the bot slower also makes it more **human-like** on the other end. I've been using this bot (in even more primitive forms than the current one) for years without hitting restrictions or raising alarms. Moreover, because the bot work on top of StatusBrew, it gave me access to all the powerful targeting/sorting features of the interface without having to build it myself.
