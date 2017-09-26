@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
 # Script is ready to use once you set up
-# Basic function: Chromdriverpath (line 17), twitter credentials as env variables (see setup.py)
+# Basic function: Chromdriverpath (line 17), Twitter login and password as environment variables (see readme)
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
