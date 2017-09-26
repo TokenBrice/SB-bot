@@ -1,5 +1,6 @@
 import time
 import sys
+import os
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import ElementNotVisibleException
@@ -9,13 +10,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
-# Optional CALLR API used for SMS reporting
-# import callr
-# api = callr.Api("CALLRLogin","CALLRpwd")
-
 # Script is ready to use once you set up
-# Basic function: Chromdrivepath (line 23), SB login (34), SB password (36)
-# Optional SMS Reporting: CALLR logins (15), Destination number (82)
+# Chromdrivepath (line 18), Twitter login and password as environment variables (see setup.py)
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
@@ -25,14 +21,16 @@ driver = webdriver.Chrome(executable_path="CHROMDRIVER.EXE PATH", chrome_options
 def login():
 		driver.get("https://statusbrew.com/")
 		time.sleep(3)
+		twitter_login = os.environ.get("TW_LOGIN", "")
+		twitter_pwd = os.environ.get("TW_PWD", "")
 		driver.find_element_by_link_text('Log in').click()
 		time.sleep(1)
 		driver.find_element_by_link_text('Log in with Twitter').click()
 		time.sleep(5)
 		username = driver.find_element_by_id('username_or_email')
-		username.send_keys('YOURLOGIN')
+		username.send_keys(twitter_login)
 		password = driver.find_element_by_id('password')
-		password.send_keys('YOURPASSWORD')
+		password.send_keys(twitter_pwd)
 		driver.find_element_by_id('allow').click()
 
 # FOLLOWER BOT
