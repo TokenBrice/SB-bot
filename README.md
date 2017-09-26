@@ -14,9 +14,11 @@ Twitter Account ID: TW_LOGIN
 Twitter Account Password: TW_PWD
 #### Windows (Powershell)
 $env:TW_LOGIN = 'twitterlogin'
+
 $env:TW_PWD = 'twitterpassword'
 #### Bash
 export TW_LOGIN='twitterlogin'
+
 export TW_PWD='twitterpassword'
 
 ## Requirements
