@@ -1,5 +1,6 @@
 import time
 import sys
+import os
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import ElementNotVisibleException
@@ -9,12 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
 # Script is ready to use once you set up
-# Basic function: Chromdriverpath (line 20), SB login (30), SB password (32)
-# Optional SMS Reporting: CALLR logins (17), Destination number (74)
-
-# Optional, CALLR API is used for SMS reporting
-# import callr
-# api = callr.Api("YOURCALLRID","YOURCALLRPWD")
+# Basic function: Chromdriverpath (line 17), twitter credentials as env variables (see setup.py)
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
@@ -22,17 +18,19 @@ driver = webdriver.Chrome(executable_path="CHROMDRIVER.EXE PATH", chrome_options
 
 # LOGIN WITH TWITTER
 def login():
-        driver.get("https://statusbrew.com/")
-        time.sleep(3)
-        driver.find_element_by_link_text('Log in').click()
-        time.sleep(1)
-        driver.find_element_by_link_text('Log in with Twitter').click()
-        time.sleep(5)
-        username = driver.find_element_by_id('username_or_email')
-        username.send_keys('YOURLOGIN')
-        password = driver.find_element_by_id('password')
-        password.send_keys('YOURPASSWORD')
-        driver.find_element_by_id('allow').click()
+	driver.get("https://statusbrew.com/")
+	time.sleep(3)
+	twitter_login = os.environ.get("TW_LOGIN", "")
+	twitter_pwd = os.environ.get("TW_PWD", "")
+	driver.find_element_by_link_text('Log in').click()
+	time.sleep(1)
+	driver.find_element_by_link_text('Log in with Twitter').click()
+	time.sleep(5)
+	username = driver.find_element_by_id('username_or_email')
+	username.send_keys(twitter_login)
+	password = driver.find_element_by_id('password')
+	password.send_keys(twitter_pwd)
+	driver.find_element_by_id('allow').click()
 
 # UNFOLLOW-BUTTON CLICKER + FAIL COUNTER
 failcount = 0
@@ -71,14 +69,13 @@ def unfollowloop():
 # CLOSE + LOG FUNCTION
 def ending():
         print("Ending+logging function runned %d unfollowed" % ufcount)
-        # OPTIONAL SMS REPORTING api.call('sms.send', 'SMS', '+336XXXXXXXX', 'Unfollow bot done, %d unfollowed' % ufcount, None)
         driver.quit()
         sys.exit()
 
 # FETCH UNFOLLOW PAGE AND RUN
 login()
 time.sleep(5)
-driver.get("https://app.statusbrew.com/p/audience/twitter/102725697/activity/nfb?exclude_rf_days=7") #CALLR
+driver.get("https://app.statusbrew.com/p/audience/twitter/102725697/activity/nfb?exclude_rf_days=7")
 # URL of the page listing all the account you follow. The filter "exclude_rf_days" let you exclude recently followed people.
 time.sleep(5)
 unfollowloop()
