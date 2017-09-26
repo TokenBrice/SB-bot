@@ -1,4 +1,4 @@
-# SB-bot
+# StatusBrew-bot
 
 ## Purpose
 Simple Python scripts made for learning purposes. Using Selenium and Statusbrew.com, they allow for semi-automated and targeted Twitter follow/defolow activities.
@@ -7,6 +7,17 @@ Simple Python scripts made for learning purposes. Using Selenium and Statusbrew.
 ## Disclaimer
 * **The defollow (unfollow.py) script is fully autonomous** and can be ran with TaskScheduler/CRON jobs.
 * **The follow (follow.py) script still requires manual intervention**, as I wanted to keep control over the targeted accounts for follower scraping.
+
+## Setting up your Twitter Credentials
+The script use environement variables to avoid storing credential in plaintext. You'll have to input your credentials in the terminal before running the script. Both scripts require two variables to run:
+Twitter Account ID: TW_LOGIN
+Twitter Account Password: TW_PWD
+#### Windows (Powershell)
+$env:TW_LOGIN = 'twitterlogin'
+$env:TW_PWD = 'twitterpassword'
+#### Bash
+export TW_LOGIN='twitterlogin'
+export TW_PWD='twitterpassword'
 
 ## Requirements
 * You'll need an account on [StatusBrew](https://www.statusBrew.com) to use the script.
