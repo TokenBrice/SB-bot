@@ -75,6 +75,7 @@ def followloop():
 	for doit in todos:
 		doit()
 		fcount += 1
+		time.sleep(1)
 	print(fcount)
 	return fcount
 
