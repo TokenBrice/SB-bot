@@ -1,37 +1,38 @@
 import time
 import sys
-import os
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import ElementNotVisibleException
 from selenium.common.exceptions import UnexpectedAlertPresentException
 from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import os
+from slacker import Slacker
 
-# Script is ready to use once you set up
-# Chromdrivepath (line 18), Twitter login and password as environment variables (see readme)
-
+slack = Slacker('token') # Where?
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
-driver = webdriver.Chrome(executable_path="CHROMDRIVER.EXE PATH", chrome_options=options)
+driver = webdriver.Chrome(executable_path="chomedriver.exe PATH", chrome_options=options)
+wait = WebDriverWait(driver, 10)
 
-# CALLR LOGIN WITH TWITTER
+# LOGIN WITH TWITTER
 def login():
-		driver.get("https://statusbrew.com/")
-		time.sleep(3)
-		twitter_login = os.environ.get("TW_LOGIN", "")
-		twitter_pwd = os.environ.get("TW_PWD", "")
-		driver.find_element_by_link_text('Log in').click()
-		time.sleep(1)
-		driver.find_element_by_link_text('Log in with Twitter').click()
-		time.sleep(5)
-		username = driver.find_element_by_id('username_or_email')
-		username.send_keys(twitter_login)
-		password = driver.find_element_by_id('password')
-		password.send_keys(twitter_pwd)
-		driver.find_element_by_id('allow').click()
+    driver.get("https://statusbrew.com/login")
+    time.sleep(3)
+    os.environ.get("TW_LOGIN", "")
+    twitter_pwd = os.environ.get("TW_PWD", "")
+    driver.find_element_by_link_text('Login with Twitter').click()
+    time.sleep(5)
+    username = driver.find_element_by_id('username_or_email')
+    username.send_keys(twitter_login)
+    password = driver.find_element_by_id('password')
+    password.send_keys(twitter_pwd)
+    driver.find_element_by_id('allow').click()
 
 # FOLLOWER BOT
 failcount = 0
@@ -41,8 +42,9 @@ def followerbot():
 		if failcount > 7:
 			ending()
 		else:
-			driver.find_element_by_xpath('//*[@id="infinite-container"]/div/div[1]/div[5]/md-card/md-card-title/md-card-title-text/div/md-card-actions/div/com-activity-user-action-btn/button').click()
-			time.sleep(1)
+			wait = WebDriverWait(driver, 10)
+			element = wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'sb-activity-user-action-btn')))
+			driver.find_element_by_tag_name("sb-activity-user-action-btn").click()
 	except NoSuchElementException:
 		print('Followerbot: BIP_BOP NoSuchElementException, retry in 15s. BOP_BIP')
 		time.sleep(10)
@@ -59,13 +61,17 @@ def followerbot():
 		print('Unfollowerbot: BIP_BOP StaleElementReferenceException, retry in 7s. BOP_BIP')
 		time.sleep(7)
 		failcount +=1
+	except TimeoutException:
+		print('Unfollowerbot: BIP_BOP Timeout Exception, closing program BOP_BIP')
+		time.sleep(7)
+		failcount +=1
 
 # UNFOLLOW BUTTON CLICKER LOOP
 fcount = 0
 def followloop():
 	global fcount
 	print("\n BIP_BOP Followerbot started BOP_BIP")
-	todos = [followerbot] * 500
+	todos = [followerbot] * 200
 	for doit in todos:
 		doit()
 		fcount += 1
@@ -76,7 +82,7 @@ def followloop():
 def ending(fcount):
 	print(fcount)
 	print("Ending+logging function runned. %d followed" % fcount)
-	# OPTIONAL SMS REPORT api.call('sms.send', 'SMS', '+336XXXXXXXX', 'Followbot done, %d followed' % fcount, None)
+	slack.chat.post_message('#channel', 'TWITTERBOT REPORT: Interactions with %d accounts' % fcount)
 	driver.quit()
 	sys.exit()
 
@@ -86,11 +92,14 @@ time.sleep(5)
 # Command Menu
 while True:
 	print("""
-	1.Follow
-	2. Exit
+	1.Follow/Unfollow x 200
+	2.Report
+	3.Exit
 	""")
 	ans = input("BIP_BOP What would you like to do? BOP_BIP ")
 	if ans == "1":
 		followloop()
 	if ans == "2":
+		report(fcount)
+	if ans == "3":
 		ending(fcount)
