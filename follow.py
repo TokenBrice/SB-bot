@@ -79,11 +79,15 @@ def followloop():
 	print(fcount)
 	return fcount
 
-# CLOSE + LOG FUNCTION
+# LOG FUNCTION
+def report(fcount):
+	print(fcount)
+	print("Logging function runned. %d followed" % fcount)
+	slack.chat.post_message('#channel', 'TWITTERBOT REPORT: %d people followed' % fcount)
+
+# CLOSE/END FUNCTION
 def ending(fcount):
 	print(fcount)
-	print("Ending+logging function runned. %d followed" % fcount)
-	slack.chat.post_message('#channel', 'TWITTERBOT REPORT: Interactions with %d accounts' % fcount)
 	driver.quit()
 	sys.exit()
 
