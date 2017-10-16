@@ -26,7 +26,7 @@ Edit the script at line 20
 ## Other options to set up
 
 * [Slack token](https://get.slack.help/hc/en-us/articles/215770388-Create-and-regenerate-API-tokens) - line 17
-* Slack channel and message - line 85
+* Slack channel and message - line 86
 * Loop amount (default is 200) - line 74
 
 ## Why Selenium?
