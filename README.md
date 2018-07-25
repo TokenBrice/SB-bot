@@ -19,7 +19,7 @@ export TW_PWD='twitterpassword'
 Edit the script at line 20
 
 ## Requirements
-* You'll need an account on [StatusBrew](https://www.statusBrew.com) to use the script.
+* You'll need an account on [StatusBrew](https://statusbrew.com/bberdah) to use the script.
 * [Selenium Python library](http://selenium-python.readthedocs.io/) is also required.
 * [Slacker](https://github.com/os/slacker) for slack reporting.
 
