@@ -97,7 +97,7 @@ def ending(fcount):
 login()
 time.sleep(5)
 
-# UNFOLLOW GWAPITAPP
+# UNFOLLOW
 
 driver.get("{{YOUR_STATUSBREW_ACCOUNT_URL}}/cleanup_suggestions")
 time.sleep(10)
